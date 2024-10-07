@@ -10,6 +10,7 @@
 [![Github commits](https://flat.badgen.net/github/commits/frantanius/lingua?icon=github&color=black&scale=1.01)](https://github.com/frantanius/lingua/commits "Github commits")
 [![GitHub issues](https://flat.badgen.net/github/issues/frantanius/lingua?icon=github&color=black&scale=1.01)](https://github.com/frantanius/lingua/issues "GitHub issues")
 [![GitHub pull requests](https://flat.badgen.net/github/prs/frantanius/lingua?icon=github&color=black&scale=1.01)](https://github.com/frantanius/lingua/pulls "GitHub pull requests")
+[![Vercel status](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://lingua-seven.vercel.app/ "Vercel status")
 
 <!-- Table of Contents -->
 <details>
@@ -238,7 +239,7 @@ Once the script completes, check your database to ensure that the challenges dat
 
 ## :wrench: Stats
 
-[![Stats for Lingua](/.github/images/stats.svg "Stats for Lingua")](https://pagespeed.web.dev/analysis?url=https:/// "Stats for Lingua")
+[![Stats for Lingua](/.github/images/stats.svg "Stats for Lingua")](https://pagespeed.web.dev/analysis?url=https://https://lingua-seven.vercel.app/ "Stats for Lingua")
 
 ## :raised_hands: Contribute
 
