@@ -2,7 +2,7 @@
 
 # Lingua - Interactive platform for language learning.
 
-![Lingua - Interactive platform for language learning.](/.github/images/img_main.png "Lingua - Interactive platform for language learning.")
+![Lingua - Interactive platform for language learning.](/.github/images/img_hero.png "Lingua - Interactive platform for language learning.")
 
 [![GitHub license](https://flat.badgen.net/github/license/frantanius/lingua?icon=github&color=black&scale=1.01)](https://github.com/frantanius/lingua/blob/main/LICENSE "GitHub license")
 [![Maintenance](https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01)](https://github.com/frantanius/lingua/commits/main "Maintenance")
@@ -227,11 +227,11 @@ Once the script completes, check your database to ensure that the challenges dat
 
 ## :camera: Screenshots
 
-![Modern UI/UX](/.github/images/img1.png "Modern UI/UX")
+![Modern UI/UX](/.github/images/img_1.png "Modern UI/UX")
 
-![Quests](/.github/images/img2.png "Quests")
+![Quests](/.github/images/img_2.png "Quests")
 
-![Shop](/.github/images/img3.png "Shop")
+![Shop](/.github/images/img_3.png "Shop")
 
 ## :gear: Tech Stack
 
@@ -239,7 +239,7 @@ Once the script completes, check your database to ensure that the challenges dat
 
 ## :wrench: Stats
 
-[![Stats for Lingua](/.github/images/stats.svg "Stats for Lingua")](https://pagespeed.web.dev/analysis?url=https://https://lingua-seven.vercel.app/ "Stats for Lingua")
+[![Stats for Lingua](/.github/images/stats.svg "Stats for Lingua")](https://pagespeed.web.dev/analysis?url=https://lingua-seven.vercel.app/ "Stats for Lingua")
 
 ## :raised_hands: Contribute
 
