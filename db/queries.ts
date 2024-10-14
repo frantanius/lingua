@@ -1,6 +1,5 @@
 import { cache } from "react";
 import db from "@/db/drizzle";
-import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import {
   challengeProgress,
@@ -10,16 +9,17 @@ import {
   userProgress,
   userSubscription,
 } from "@/db/schema";
+import { currentUser } from "@/lib/auth";
 
 export const getUserProgress = cache(async () => {
-  const { userId } = auth();
+  const user = await currentUser();
 
-  if (!userId) {
+  if (!user?.id) {
     return null;
   }
 
   const data = await db.query.userProgress.findFirst({
-    where: eq(userProgress.userId, userId),
+    where: eq(userProgress.userId, user.id),
     with: {
       activeCourse: true,
     },
@@ -29,10 +29,10 @@ export const getUserProgress = cache(async () => {
 });
 
 export const getUnits = cache(async () => {
-  const { userId } = auth();
+  const user = await currentUser();
   const userProgress = await getUserProgress();
 
-  if (!userId || !userProgress?.activeCourseId) {
+  if (!user?.id || !userProgress?.activeCourseId) {
     return [];
   }
 
@@ -47,7 +47,7 @@ export const getUnits = cache(async () => {
             orderBy: (challenges, { asc }) => [asc(challenges.order)],
             with: {
               challengeProgress: {
-                where: eq(challengeProgress.userId, userId),
+                where: eq(challengeProgress.userId, user.id),
               },
             },
           },
@@ -104,11 +104,11 @@ export const getCourseById = cache(async (courseId: number) => {
 });
 
 export const getCourseProgress = cache(async () => {
-  const { userId } = auth();
+  const user = await currentUser();
   const userProgress = await getUserProgress();
 
   // no progress to render for this user
-  if (!userId || !userProgress?.activeCourseId) {
+  if (!user?.id || !userProgress?.activeCourseId) {
     return null;
   }
 
@@ -123,7 +123,7 @@ export const getCourseProgress = cache(async () => {
           challenges: {
             with: {
               challengeProgress: {
-                where: eq(challengeProgress.userId, userId),
+                where: eq(challengeProgress.userId, user.id),
               },
             },
           },
@@ -154,10 +154,10 @@ export const getCourseProgress = cache(async () => {
 });
 
 export const getLesson = cache(async (id?: number) => {
-  const { userId } = auth();
+  const user = await currentUser();
 
   // if not authenticated do nothing (save process and resources)
-  if (!userId) {
+  if (!user?.id) {
     return null;
   }
 
@@ -177,7 +177,7 @@ export const getLesson = cache(async (id?: number) => {
         with: {
           challengeOptions: true,
           challengeProgress: {
-            where: eq(challengeProgress.userId, userId),
+            where: eq(challengeProgress.userId, user.id),
           },
         },
       },
@@ -227,12 +227,12 @@ export const getLessonPercentage = cache(async () => {
 
 const DAY_IN_MS = 86_400_000;
 export const getUserSubscription = cache(async () => {
-  const { userId } = await auth();
+  const user = await currentUser();
 
-  if (!userId) return null;
+  if (!user?.id) return null;
 
   const data = await db.query.userSubscription.findFirst({
-    where: eq(userSubscription.userId, userId),
+    where: eq(userSubscription.userId, user.id),
   });
 
   if (!data) return null;
@@ -251,9 +251,9 @@ export const getUserSubscription = cache(async () => {
 
 // get top 10 users
 export const getTopTenUsers = cache(async () => {
-  const { userId } = await auth();
+  const user = await currentUser();
 
-  if (!userId) {
+  if (!user?.id) {
     return [];
   }
 

@@ -36,6 +36,8 @@ const buttonVariants = cva(
         ghost:
           "bg-transparent text-slate-500 border-transparent border-0 hover:bg-slate-100",
 
+        link: "text-slate-500 underline-offset-4 hover:underline",
+
         sidebar:
           "bg-transparent text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none",
         sidebarOutline:

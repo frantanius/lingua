@@ -1,7 +1,6 @@
 "use server";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
-
+import { auth } from "@/auth";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscription } from "@/db/queries";
@@ -9,11 +8,9 @@ import { getUserSubscription } from "@/db/queries";
 const returnUrl = absoluteUrl("/shop"); // http://localhost:3000/shop
 
 export const createStripeUrl = async () => {
-  const { userId } = auth();
+  const session = await auth();
 
-  const user = await currentUser();
-
-  if (!userId || !user) {
+  if (!session?.user || !session.user.id) {
     throw new Error("Unauthorized");
   }
 
@@ -28,10 +25,12 @@ export const createStripeUrl = async () => {
     return { data: stripeSession.url };
   }
 
+  const customerEmail = session.user.email ?? "";
+
   const stripeSession = await stripe.checkout.sessions.create({
     mode: "subscription",
     payment_method_types: ["card"],
-    customer_email: user.emailAddresses[0].emailAddress,
+    customer_email: customerEmail,
     line_items: [
       {
         quantity: 1,
@@ -51,7 +50,7 @@ export const createStripeUrl = async () => {
     ],
     metadata: {
       // our webhook will fire, letting us know which user bought the subscription
-      userId,
+      user_id: session.user.id,
     },
     success_url: returnUrl,
     cancel_url: returnUrl,

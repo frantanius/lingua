@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 
 import db from "@/db/drizzle";
 import { challengeOptions } from "@/db/schema";
-import { isAdmin } from "@/lib/admin";
+import { isAdminRole } from "@/lib/auth";
 
 export const GET = async (
   req: Request,
   { params }: { params: { challengeOptionId: number } }
 ) => {
-  if (!isAdmin()) {
+  if (!isAdminRole()) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
@@ -28,7 +28,7 @@ export const PUT = async (
   req: Request,
   { params }: { params: { challengeOptionId: number } }
 ) => {
-  if (!isAdmin()) {
+  if (!isAdminRole()) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
@@ -49,7 +49,7 @@ export const DELETE = async (
   req: Request,
   { params }: { params: { challengeOptionId: number } }
 ) => {
-  if (!isAdmin()) {
+  if (!isAdminRole()) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 

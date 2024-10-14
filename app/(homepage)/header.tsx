@@ -1,19 +1,12 @@
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import AuthButton from "@/components/auth/auth-button";
+import UserButton from "@/components/auth/user-button";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 
-export default function Header() {
-  const { userId }: { userId: string | null } = auth();
+export default async function Header() {
+  const session = await auth();
 
   return (
     <header className="h-20 w-full border-b-2 border-slate-200 px-4">
@@ -27,40 +20,30 @@ export default function Header() {
         </Link>
 
         <div className="flex gap-x-3">
-          <ClerkLoading>
-            <Loader className="h-5 w-5 animate-spin text-muted-foreground" />
-          </ClerkLoading>
-          <ClerkLoaded>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-
-            <SignedOut>
-              <SignInButton
-                mode="modal"
-                fallbackRedirectUrl="/learn"
-                signUpFallbackRedirectUrl="/learn"
-              >
+          {!session && (
+            <>
+              <AuthButton type="login" mode="modal" asChild>
                 <Button size="lg" variant="ghost">
                   Login
                 </Button>
-              </SignInButton>
-            </SignedOut>
+              </AuthButton>
 
-            <Link
-              href="https://github.com/frantanius/lingua"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={userId ? "pt-1.5" : "pt-3"}
-            >
-              <Image
-                src="/github.svg"
-                alt="Source Code"
-                height={20}
-                width={20}
-              />
-            </Link>
-          </ClerkLoaded>
+              <Link
+                href="https://github.com/frantanius/lingua"
+                target="_blank"
+                rel="noreferrer noopener"
+                className={session ? "pt-1.5" : "pt-3"}
+              >
+                <Image
+                  src="/github.svg"
+                  alt="Source Code"
+                  height={20}
+                  width={20}
+                />
+              </Link>
+            </>
+          )}
+          {session && <UserButton />}
         </div>
       </div>
     </header>

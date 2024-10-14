@@ -10,6 +10,8 @@ const main = async () => {
   try {
     console.log("Resetting the database");
 
+    await db.delete(schema.users);
+    await db.delete(schema.accounts);
     await db.delete(schema.courses);
     await db.delete(schema.userProgress);
     await db.delete(schema.units);

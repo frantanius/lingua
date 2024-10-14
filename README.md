@@ -144,10 +144,6 @@ lingua/
 
 ```env
 
-# clerk auth keys
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-CLERK_SECRET_KEY=sk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
 # neon db uri
 DATABASE_URL="postgresql://<user>:<password>@<host>:<post>/lingua?sslmode=require"
 
@@ -158,18 +154,90 @@ STRIPE_WEBHOOK_SECRET=whsec_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 # public app url
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
+# github auth keys
+GITHUB_CLIENT_ID=xxxxxxxxxxxxxx
+GITHUB_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# google auth keys
+GOOGLE_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 ```
 
-5. Obtain Clerk Authentication Keys
+1. Generate Authentication Secret
 
-   1. **Source**: Clerk Dashboard or Settings Page
-   2. **Procedure**:
-      - Log in to your Clerk account.
-      - Navigate to the dashboard or settings page.
-      - Look for the section related to authentication keys.
-      - Copy the `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` provided in that section.
+1. **Generate Random Authentication Secret:**
 
-6. Retrieve Neon Database URI
+   - Visit [generate-secret.vercel.app](https://generate-secret.vercel.app/32).
+   - Copy the generated secret.
+
+1. **Update `.env` with Authentication Secret:**
+
+   - Open your `.env` file.
+   - Update the `AUTH_SECRET` variable with the generated secret:
+
+     ```bash
+     # .env
+
+     # Random auth secret
+     AUTH_SECRET="xxxxxxxxxxxxxxxxxxxxxxxxxx"
+     ```
+
+1. Configure NEXT_PUBLIC_APP_URL Base URL
+
+1. **Set NEXT_PUBLIC_APP_URL Base URL:**
+
+   - Open your `.env` file.
+   - Set the `NEXT_PUBLIC_APP_URL` variable to the base URL of your Next.js application:
+
+     ```bash
+     # .env
+
+     # NextAuth base URL
+     NEXT_PUBLIC_APP_URL=http://localhost:3000
+     ```
+
+1. Obtain GitHub Authentication Keys
+
+1. **Register Application on GitHub:**
+
+   - Go to the [GitHub Developer Settings](https://github.com/settings/developers) and register a new OAuth application.
+   - Obtain the client ID and client secret.
+
+1. **Update `.env` with GitHub Keys:**
+
+   - Open your `.env` file.
+   - Update the following variables with the obtained GitHub keys:
+
+     ```bash
+     # .env
+
+     # GitHub auth keys
+     GITHUB_CLIENT_ID=xxxxxxxxxxxxxx
+     GITHUB_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     ```
+
+1. Obtain Google Authentication Keys
+
+1. **Register Application on Google Cloud Console:**
+
+   - Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a new project.
+   - Enable the "Google+ API" for your project and create credentials to obtain the client ID and client secret.
+
+1. **Update `.env` with Google Keys:**
+
+   - Open your `.env` file.
+   - Update the following variables with the obtained Google keys:
+
+     ```bash
+     # .env
+
+     # Google auth keys
+     GOOGLE_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+     GOOGLE_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     ```
+
+1. Retrieve Neon Database URI
 
    1. **Source**: Database Provider (e.g., Neon, PostgreSQL)
    2. **Procedure**:
@@ -178,7 +246,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
       - Replace `<user>`, `<password>`, `<host>`, and `<port>` placeholders in the URI with your actual database credentials.
       - Ensure to include `?sslmode=require` at the end of the URI for SSL mode requirement.
 
-7. Fetch Stripe API Key and Webhook Secret
+1. Fetch Stripe API Key and Webhook Secret
 
    1. **Source**: Stripe Dashboard
    2. **Procedure**:
@@ -187,27 +255,18 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
       - Find the section related to API keys and webhook secrets.
       - Copy the `STRIPE_API_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`.
 
-8. Specify Public App URL
+1. Specify Public App URL
 
    1. **Procedure**:
       - Replace `http://localhost:3000` with the URL of your deployed application.
 
-9. Identify Clerk Admin User IDs
+1. Save and Secure:
 
-   1. **Source**: Clerk Dashboard or Settings Page
-   2. **Procedure**:
-      - Log in to your Clerk account.
-      - Navigate to the dashboard or settings page.
-      - Find the section related to admin user IDs.
-      - Copy the user IDs provided, ensuring they are separated by commas and spaces.
+   - Save the changes to the `.env` file.
 
-10. Save and Secure:
+1. Install Project Dependencies using `npm install --legacy-peer-deps` or `yarn install --legacy-peer-deps`.
 
-    - Save the changes to the `.env` file.
-
-11. Install Project Dependencies using `npm install --legacy-peer-deps` or `yarn install --legacy-peer-deps`.
-
-12. Run the Seed Script:
+1. Run the Seed Script:
 
 In the same terminal, run the following command to execute the seed script:
 

@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1728881212957,
+      "tag": "0000_opposite_beyonder",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728883442186,
+      "tag": "0001_fast_sleeper",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1728912590864,
+      "tag": "0002_strange_proteus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1728919786462,
+      "tag": "0003_certain_the_enforcers",
+      "breakpoints": true
+    }
+  ]
+}
