@@ -14,6 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,6 +98,7 @@ export default function LoginForm() {
                       type="email"
                     />
                   </FormControl>
+                  <FormDescription>admin@example.com</FormDescription>
 
                   <FormMessage />
                 </FormItem>
@@ -116,6 +118,7 @@ export default function LoginForm() {
                       type="password"
                     />
                   </FormControl>
+                  <FormDescription>123456</FormDescription>
 
                   <FormMessage />
                 </FormItem>
